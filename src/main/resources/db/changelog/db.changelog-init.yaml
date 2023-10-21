@@ -1,0 +1,77 @@
+databaseChangeLog:
+  - logicalFilePath: /db/changelog/db.changelog-init.yaml
+  - changeSet:
+      id: 1697808861761-1
+      author: pasvitas (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createSequence:
+            incrementBy: 1
+            sequenceName: examples_id_seq
+            startValue: 1
+  - changeSet:
+      id: 1697808861761-2
+      author: pasvitas (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createSequence:
+            incrementBy: 1
+            sequenceName: inner_id_seq
+            startValue: 1
+  - changeSet:
+      id: 1697808861761-3
+      author: pasvitas (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_examples
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: title
+                  type: VARCHAR(255)
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+            tableName: examples
+  - changeSet:
+      id: 1697808861761-4
+      author: pasvitas (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_inner_entity
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: inner_title
+                  type: VARCHAR(255)
+              - column:
+                  name: inner_value
+                  type: INT
+              - column:
+                  name: parent_id
+                  type: BIGINT
+            tableName: inner_entity
+  - changeSet:
+      id: 1697808861761-5
+      author: pasvitas (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: parent_id
+            baseTableName: inner_entity
+            constraintName: FK_INNER_ENTITY_ON_PARENT
+            referencedColumnNames: id
+            referencedTableName: examples
+
